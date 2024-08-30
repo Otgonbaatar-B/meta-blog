@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div>
       <Header />
-      <Slider />
+      <Slider imgUrl={"/Images/Image.svg"} />
       <Trending />
       <BlogPost />
     </div>
