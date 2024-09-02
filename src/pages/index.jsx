@@ -11,9 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <div className="main w-full h-full">
-      <div className="body flex flex-col max-w-[1440px] w-auto h-auto m-auto gap-[100px]">
-        <HomePage />
-      </div>
+      <HomePage />
     </div>
   );
 }

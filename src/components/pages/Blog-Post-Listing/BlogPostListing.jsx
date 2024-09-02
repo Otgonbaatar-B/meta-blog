@@ -1,19 +1,19 @@
-import { DateFormatter } from "../util/DateFormatter";
-import { BlogPostBody } from "./BlogPostBody";
-import { BlogPostHeader } from "./BlogPostHeader";
+import { DateFormatter } from "@/components/util/DateFormatter";
+import { BlogPostListingHeader } from "./BlogPostListingHeader";
+import { BlogPostListingBody } from "./BlogPostListingBody";
 
-export const BlogPost = ({ articles = [], handlePlusPage }) => {
+export const BlogPostListing = ({ articles = [], handlePlusPage }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="flex flex-col w-full h-auto justify-center items-center p-4 md:px-20 md:py-4 gap-8">
-        <BlogPostHeader articles={articles} />
+        <BlogPostListingHeader articles={articles} />
         <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 h-auto gap-2 md:gap-5 m-auto">
           {articles.map((article) => {
             const formattedDate = <DateFormatter article={article} />;
             console.log(article);
 
             return (
-              <BlogPostBody
+              <BlogPostListingBody
                 key={article.id}
                 imgUrl={article.cover_image}
                 badge={article.tag_list[0]}

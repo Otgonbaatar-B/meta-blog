@@ -1,6 +1,6 @@
 import { TrendingCard } from "./TrendingCard";
 
-export const Trending = () => {
+export const Trending = ({ articles }) => {
   const trendingDatas = [
     {
       imgUrl: "/Images/trend-img1.jpg",

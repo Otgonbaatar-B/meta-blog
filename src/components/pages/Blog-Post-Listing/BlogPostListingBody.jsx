@@ -1,4 +1,4 @@
-export const BlogPostBody = ({ imgUrl, badge, title, date }) => {
+export const BlogPostListingBody = ({ imgUrl, badge, title, date }) => {
   return (
     <div className="flex flex-col justify-between w-auto h-auto rounded-xl border border-solid border-[var(--secondary-100)] p-4 bg-white gap-4">
       <div

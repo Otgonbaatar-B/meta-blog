@@ -4,12 +4,12 @@ export const Slider = ({ imgUrl }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div
-        className="container flex flex-col w-full h-[651px] justify-end rounded-xl p-4 md:px-20 md:py-4 bg-cover bg-center"
-        // style={{"background-image: url('/Images/Image.svg')"}}
+        className="container w-auto h-[600px] max-w-[1056px] flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl"
         style={{
           backgroundImage: `url(${imgUrl})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          width: "100%",
         }}
       >
         <div className="flex w-auto h-auto bg-center">
