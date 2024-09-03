@@ -6,7 +6,7 @@ export default function BlogList() {
   const [page, setPage] = useState(0);
 
   const fetchData = () => {
-    fetch(`https://dev.to/api/articles?per_page=6&page=${page}`)
+    fetch(`https://dev.to/api/articles?per_page=4&page=${page}`)
       .then((response) => response.json())
       .then((data) => {
         setArticles((prevArticles) => [...prevArticles, ...data]);
@@ -20,5 +20,9 @@ export default function BlogList() {
   useEffect(() => {
     fetchData();
   }, [page]);
-  return <BlogListing articles={articles} handlePlusPage={handlePlusPage} />;
+  return (
+    <div className="container flex flex-col max-w-[1216px] w-auto h-full m-auto gap-[100px]">
+      <BlogListing articles={articles} handlePlusPage={handlePlusPage} />;
+    </div>
+  );
 }

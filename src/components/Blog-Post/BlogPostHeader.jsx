@@ -1,4 +1,4 @@
-export const BlogPostHeader = () => {
+export const BlogPostHeader = ({ handleTagChange }) => {
   return (
     <div className="flex flex-col w-full gap-8">
       <h1 className="flex w-auto h-auto text-[var(--secondary-800)] text-2xl font-bold">
@@ -6,28 +6,50 @@ export const BlogPostHeader = () => {
       </h1>
       <div className="hidden md:flex justify-between w-full">
         <div className="flex w-auto gap-5">
-          <button className="text-xs font-bold text-[#D4A373]">
-            <a href="">All</a>
+          <button
+            onClick={() => handleTagChange("")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            All
           </button>
-          <button className="text-xs font-bold text-[#495057]">
-            <a href="">Design</a>
+          <button
+            onClick={() => handleTagChange("learning")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            Learning
           </button>
-          <button className="text-xs font-bold text-[#495057]">
-            <a href="">Travel</a>
+          <button
+            onClick={() => handleTagChange("beginner")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            Beginner
           </button>
-          <button className="text-xs font-bold text-[#495057]">
-            <a href="">Fashion</a>
+          <button
+            onClick={() => handleTagChange("frontend")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            Front-End
           </button>
-          <button className="text-xs font-bold text-[#495057]">
-            <a href="">Technology</a>
+          <button
+            onClick={() => handleTagChange("javascript")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            Javascript
           </button>
-          <button className="text-xs font-bold text-[#495057]">
-            <a href="Branding"></a>
+          <button
+            onClick={() => handleTagChange("coding")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            Coding
+          </button>
+          <button
+            onClick={() => handleTagChange("programming")}
+            className="text-xs font-bold text-[#495057] hover:text-[#D4A373]"
+          >
+            Programming
           </button>
         </div>
-        <button className="text-xs font-bold text-[#495057]">
-          <a href="">View All</a>
-        </button>
+        <button className="text-xs font-bold text-[#495057]">View All</button>
       </div>
     </div>
   );

@@ -18,6 +18,8 @@ export const BlogPostListing = ({ articles = [], handlePlusPage }) => {
                 imgUrl={article.cover_image}
                 badge={article.tag_list[0]}
                 title={article.description}
+                userName={article.user.name}
+                userImg={article.user.profile_image_90}
                 date={formattedDate}
               />
             );

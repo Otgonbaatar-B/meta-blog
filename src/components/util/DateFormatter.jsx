@@ -31,7 +31,7 @@ export const DateFormatter = ({ article }) => {
         return "";
     }
   };
-  
+
   const month = generateMonth(publishedDate.getMonth());
   const day = publishedDate.getDate();
   const year = publishedDate.getFullYear();
