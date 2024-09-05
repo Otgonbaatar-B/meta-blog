@@ -10,7 +10,7 @@ export const BlogPost = ({
 }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="flex flex-col w-full h-auto justify-center items-center p-4 md:px-20 md:py-4 gap-8">
+      <div className="flex max-w-[1256px] flex-col w-full h-auto justify-center items-center p-4 md:px-20 md:py-4 gap-8">
         <BlogPostHeader handleTagChange={handleTagChange} />
         <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 h-auto gap-2 md:gap-5 m-auto">
           {articles.map((article) => {

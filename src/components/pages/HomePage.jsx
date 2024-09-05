@@ -10,6 +10,7 @@ export default function HomePage() {
   const [trendingData, setTrendingData] = useState([]);
   const [page, setPage] = useState(1);
   const [tag, setTag] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const fetchData = () => {
     fetch(`https://dev.to/api/articles?per_page=6&page=${page}&tag=${tag}`)
@@ -41,14 +42,22 @@ export default function HomePage() {
     setPage((prevPage) => prevPage + 1);
   };
 
+  const handleToggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle("dark", !isDarkMode);
+  };
+
   useEffect(() => {
     fetchData();
     fetchTrendingData();
   }, [page, tag]);
 
   return (
-    <div className="container flex flex-col max-w-[1216px] justify-center items-center w-auto h-full m-auto gap-[100px]">
-      <Header />
+    <div className="flex flex-col justify-center items-center w-full h-full m-auto gap-[100px]">
+      <Header
+        isDarkMode={isDarkMode}
+        handleToggleDarkMode={handleToggleDarkMode}
+      />
       <Slider />
       <Trending trendingData={trendingData} />
       <BlogPost

@@ -1,14 +1,7 @@
-const { Footer } = require("@/components/Footer/Footer");
-const { Header } = require("@/components/Header/Header");
+import ContactUs from "@/components/pages/ContactUs";
 
-const ContactUs = () => {
-  return (
-    <main>
-      <Header />
-      <div>jk</div>
-      <Footer />
-    </main>
-  );
+const Contact = () => {
+  return <ContactUs />;
 };
 
-export default ContactUs;
+export default Contact;

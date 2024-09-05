@@ -25,9 +25,5 @@ export default function BlogList() {
     fetchData();
   }, [page]);
 
-  return (
-    <div className="container flex flex-col max-w-[1216px] w-auto h-full m-auto gap-[100px]">
-      <BlogListing articles={articles} handlePlusPage={handlePlusPage} />;
-    </div>
-  );
+  return <BlogListing articles={articles} handlePlusPage={handlePlusPage} />;
 }
