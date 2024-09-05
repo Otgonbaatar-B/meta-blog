@@ -20,18 +20,19 @@ export default function HomePage() {
         } else {
           setArticles((prevArticles) => [...prevArticles, ...data]);
         }
+      });
+  };
 
-        setTrendingData(
-          data
-            .sort((a, b) => b.public_reactions_count - a.public_reactions_count)
-            .slice(0, 4)
-        );
+  const fetchTrendingData = () => {
+    fetch(`https://dev.to/api/articles?per_page=4&top=4`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTrendingData(data);
       });
   };
 
   const handleTagChange = (newTag) => {
     setTag(newTag);
-    console.log(newTag);
     setPage(1);
     setArticles([]);
   };
@@ -42,17 +43,19 @@ export default function HomePage() {
 
   useEffect(() => {
     fetchData();
+    fetchTrendingData();
   }, [page, tag]);
 
   return (
-    <div className="container flex flex-col max-w-[1216px] w-auto h-full m-auto gap-[100px]">
+    <div className="container flex flex-col max-w-[1216px] justify-center items-center w-auto h-full m-auto gap-[100px]">
       <Header />
-      <Slider imgUrl={"/Images/Image.svg"} />
+      <Slider />
       <Trending trendingData={trendingData} />
       <BlogPost
         articles={articles}
         handlePlusPage={handlePlusPage}
         handleTagChange={handleTagChange}
+        // path={articles.path}
       />
       <Footer />
     </div>

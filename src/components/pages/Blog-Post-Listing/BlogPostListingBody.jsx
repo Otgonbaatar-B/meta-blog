@@ -20,10 +20,12 @@ export const BlogPostListingBody = ({
       >
         {/* <img src={imgUrl} alt="" srcset="" /> */}
       </div>
-      <div className="w-auto h-7 bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium px-[10px] py-1 rounded-md">
-        <span>{badge}</span>
+      <div>
+        <span className="w-auto h-7 bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium px-[10px] py-1 rounded-md">
+          <span>{badge}</span>
+        </span>
       </div>
-      <div className="text-[var(--secondary-800)]] text-lg font-semibold">
+      <div className="text-[var(--secondary-800)]] text-lg font-semibold line-clamp-3">
         {title}
       </div>
       <div className="flex justify-between text-center items-center gap-5">
@@ -35,7 +37,7 @@ export const BlogPostListingBody = ({
               height: "36px",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              borderRadius: "50px",
+              borderRadius: "50%",
             }}
             className="flex"
           ></div>

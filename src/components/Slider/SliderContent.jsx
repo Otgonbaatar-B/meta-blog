@@ -1,15 +1,17 @@
 export const SliderContent = ({ badge, title, date }) => {
   return (
-    <div className="flex flex-col max-w-[592px] h-[252px] p-10 bg-white bottom-2 left-2 rounded-xl gap-6">
+    <div className="flex flex-col max-w-[592px] h-[252px] p-7 bg-white bottom-2 left-2 rounded-xl gap-6">
       <div className="flex w-auto flex-col gap-4">
-        <h1 className="w-[97px]] h-7 bg-[#4B6BFB] text-white text-sm font-medium px-[10px] py-1 rounded-md">
-          {badge}
-        </h1>
-        <h1 className="text-[var(--secondary-800)] text-4xl font-semibold">
+        <div>
+          <span className="bg-[#4B6BFB] text-white text-sm font-medium font-work-sans px-[10px] py-1 rounded-md">
+            {badge}
+          </span>
+        </div>
+        <h1 className="text-[var(--secondary-800)] text-4xl font-semibold font-work-sans line-clamp-3">
           {title}
         </h1>
       </div>
-      <div className="text-[var(--secondary-400)] text-base font-normal">
+      <div className="text-[var(--secondary-400)] text-base font-normal font-work-sans">
         {date}
       </div>
     </div>

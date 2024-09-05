@@ -6,6 +6,7 @@ export const BlogPost = ({
   articles = [],
   handlePlusPage,
   handleTagChange,
+  newTag,
 }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center">
@@ -14,11 +15,16 @@ export const BlogPost = ({
         <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 h-auto gap-2 md:gap-5 m-auto">
           {articles.map((article) => {
             const formattedDate = <DateFormatter article={article} />;
+            const filteredTags = article.tag_list.filter((tag) =>
+              tag.includes(newTag)
+            );
+
             return (
               <BlogPostBody
+                articleTrend={article.path}
                 key={article.id}
                 imgUrl={article.cover_image}
-                badge={article.tag_list[0]}
+                badge={filteredTags[0] || article.tag_list[0]}
                 title={article.description}
                 date={formattedDate}
               />

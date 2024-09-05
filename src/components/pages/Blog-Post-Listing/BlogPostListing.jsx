@@ -10,7 +10,6 @@ export const BlogPostListing = ({ articles = [], handlePlusPage }) => {
         <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 h-auto gap-2 md:gap-5 m-auto">
           {articles.map((article) => {
             const formattedDate = <DateFormatter article={article} />;
-            console.log(article);
 
             return (
               <BlogPostListingBody
