@@ -2,7 +2,7 @@ import { MetaBlogIcon } from "../FooterIcons/FooterIcons";
 
 export const FooterCopyRight = () => {
   return (
-    <div className="flex justify-between md:py-8">
+    <div className="flex justify-between md:py-8 border-t border-solid border-[var(--secondary-200)]">
       <div className="flex gap-1 m-auto md:m-0">
         <div className="flex">
           <MetaBlogIcon />
