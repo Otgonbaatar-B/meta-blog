@@ -66,10 +66,16 @@ export const Slider = () => {
 
           <div className="flex w-full justify-end items-end">
             <div className="flex w-auto h-auto gap-2">
-              <button onClick={handleBackBtn}>
+              <button
+                className="hover:bg-slate-200 rounded-lg"
+                onClick={handleBackBtn}
+              >
                 <img src="/Icons/back.svg" alt="" />
               </button>
-              <button onClick={handleForwardBtn}>
+              <button
+                className="hover:bg-slate-200 rounded-lg"
+                onClick={handleForwardBtn}
+              >
                 <img src="/Icons/forward.svg" alt="" />
               </button>
             </div>

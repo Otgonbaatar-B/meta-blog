@@ -13,7 +13,7 @@ export default function HomePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const fetchData = () => {
-    fetch(`https://dev.to/api/articles?per_page=6&page=${page}&tag=${tag}`)
+    fetch(`https://dev.to/api/articles?per_page=9&page=${page}&tag=${tag}`)
       .then((response) => response.json())
       .then((data) => {
         if (page === 1) {

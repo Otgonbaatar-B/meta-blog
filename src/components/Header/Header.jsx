@@ -68,21 +68,28 @@ export const Header = ({ handleToggleDarkMode, isDarkMode }) => {
               </button>
             </Link>
           </div>
-          <div className="hidden md:flex header-action h-9 items-center gap-4">
+          {/* <div className="hidden md:flex header-action h-9 items-center gap-4">
             <div className="cursor-pointer" onClick={handleToggleDarkMode}>
               {isDarkMode ? <MoonIcon /> : <SunIcon />}
             </div>
-          </div>
-          <div className="hidden md:flex w-auto h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px] gap-3">
+          </div> */}
+          <form
+            action="https://www.google.com/search"
+            method="GET"
+            className="hidden md:flex w-auto h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px] gap-3"
+          >
             <input
               type="search"
               placeholder="Search"
               className="bg-[var(--secondary-100)] w-[114px] h-5 outline-none"
-              name=""
+              name="q"
               id=""
             />
-            <img src="/Icons/search-icon.svg" alt="" srcset="" />
-          </div>
+            <button type="submit">
+              <img src="/Icons/search-icon.svg" alt="Search Icon" />
+            </button>
+          </form>
+
           <div
             className="flex md:hidden w-auto h-auto bg-var(--Secondary-100) cursor-pointer"
             onClick={handleOpenMenu}
