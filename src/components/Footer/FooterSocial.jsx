@@ -3,7 +3,7 @@ import {
   InstagramIcon,
   LinkedinIcon,
   TwitterIcon,
-} from "../FooterIcons/FooterIcons";
+} from "../Icons/FooterIcons/FooterIcons";
 
 export const FooterSocial = () => {
   return (

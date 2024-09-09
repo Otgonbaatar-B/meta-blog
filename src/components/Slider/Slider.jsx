@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { SliderContent } from "./SliderContent";
-import { DateFormatter } from "../util/DateFormatter";
+import { DateFormatter } from "../Utils/DateFormatter";
+import Link from "next/link";
 
 export const Slider = () => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = () => {
+    setLoading(true);
     fetch(`https://dev.to/api/articles?per_page=1&page=${page}`)
       .then((response) => response.json())
-      .then((data) => setArticles(data));
+      .then((data) => {
+        setArticles(data);
+        setLoading(false);
+      });
   };
 
   const handleBackBtn = () => {
@@ -34,49 +40,61 @@ export const Slider = () => {
 
   return (
     <div className="w-full flex flex-col bg-white items-center justify-center">
-      <div className="flex justify-center items-center max-w-[1056px] w-full h-auto p-4 md:p-0">
+      <div className="flex justify-center items-center max-w-[1096px] w-full h-auto p-4 md:p-0">
         <div className="container w-full flex flex-col items-center justify-center gap-3">
-          {articles.map((data) => (
-            <div
-              key={data.id}
-              className="container w-auto h-[600px] flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl"
-              style={{
-                backgroundImage: `url(${data.cover_image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: "100%",
-                height: "600px",
-              }}
-            >
-              <div className="flex w-auto h-auto bg-center">
-                {articles.map((article) => {
-                  const formattedDate = <DateFormatter article={article} />;
-                  return (
-                    <SliderContent
-                      key={article.id}
-                      badge={article.tag_list[0]}
-                      title={article.description}
-                      date={formattedDate}
-                    />
-                  );
-                })}
-              </div>
+          {loading ? (
+            <div className="container w-auto h-[600px] flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl">
+              <div className="skeleton h-full w-[1096px] rounded-xl bg-gray-300 animate-pulse"></div>
+              <div className="skeleton h-[500px] w-[600px] rounded-xl bg-gray-300 animate-pulse"></div>
             </div>
-          ))}
+          ) : (
+            articles.map((data) => (
+              <div
+                key={data.id}
+                className="container w-auto h-[600px] flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl"
+                style={{
+                  backgroundImage: `url(${
+                    data.cover_image
+                      ? data.cover_image
+                      : "https://images.squarespace-cdn.com/content/v1/62f9aaa33a6fe8320f52f5aa/1673511295216-OKBJ25VEVMSY116D6MES/noimage.jpg"
+                  })`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  width: "100%",
+                  height: "600px",
+                }}
+              >
+                <div className="flex w-auto h-auto bg-center">
+                  {articles.map((article) => {
+                    const formattedDate = <DateFormatter article={article} />;
+                    return (
+                      <Link href={`blog/${data.id}`} key={article.id}>
+                        <SliderContent
+                          badge={article.tag_list[0]}
+                          title={article.description}
+                          date={formattedDate}
+                        />
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ))
+          )}
 
           <div className="flex w-full justify-end items-end">
             <div className="flex w-auto h-auto gap-2">
               <button
-                className="hover:bg-slate-200 rounded-lg"
+                className="shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-lg"
                 onClick={handleBackBtn}
               >
-                <img src="/Icons/back.svg" alt="" />
+                <img src="/Icons/back.svg" alt="Back" />
               </button>
               <button
-                className="hover:bg-slate-200 rounded-lg"
+                className="shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-lg"
                 onClick={handleForwardBtn}
               >
-                <img src="/Icons/forward.svg" alt="" />
+                <img src="/Icons/forward.svg" alt="Forward" />
               </button>
             </div>
           </div>

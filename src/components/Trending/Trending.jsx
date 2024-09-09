@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { TrendingCard } from "./TrendingCard";
 
-export const Trending = ({ trendingData }) => {
+export const Trending = ({ trendingData, loading }) => {
   return (
     <div className="w-full flex flex-col bg-white items-center justify-center">
       <div className="w-full max-w-[1256px] flex flex-col items-center justify-center">
@@ -10,16 +11,26 @@ export const Trending = ({ trendingData }) => {
               Trending
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-auto gap-5">
-              {trendingData.map((data) => {
-                return (
-                  <TrendingCard
-                    key={data.id}
-                    badge={data.tag_list[0]}
-                    title={data.description}
-                    imgUrl={data.cover_image}
-                  />
-                );
-              })}
+              {loading
+                ? Array.from({ length: 4 }).map((_, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl bg-gray-200 animate-pulse"
+                    >
+                      <div className="skeleton h-60 w-full rounded-xl bg-gray-300"></div>
+                      <div className="skeleton h-4 w-3/4 mt-2 bg-gray-300"></div>
+                      <div className="skeleton h-4 w-1/2 bg-gray-300"></div>
+                    </div>
+                  ))
+                : trendingData.map((data) => (
+                    <Link key={data.id} href={`blog/${data.id}`} passHref>
+                      <TrendingCard
+                        badge={data.tag_list[0]}
+                        title={data.description}
+                        imgUrl={data.cover_image}
+                      />
+                    </Link>
+                  ))}
             </div>
           </div>
         </div>

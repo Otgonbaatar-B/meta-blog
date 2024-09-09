@@ -8,7 +8,7 @@ export const FooterLink = () => {
           Home
         </div>
       </Link>
-      <Link href={"./bloglist"}>
+      <Link href={"./blog-list"}>
         <div className="text-[var(--secondary-600)] text-base font-normal">
           Blog
         </div>

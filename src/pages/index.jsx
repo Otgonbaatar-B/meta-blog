@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Header } from "../components/Header/Header";
 import { Slider } from "../components/Slider/Slider";
 import { Trending } from "../components/Trending/Trending";
-import HomePage from "@/components/pages/HomePage";
+import HomePage from "@/components/Pages/HomePage";
 // import { Work_Sans } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });

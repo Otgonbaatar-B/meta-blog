@@ -1,4 +1,4 @@
-import { MetaBlogIcon } from "../FooterIcons/FooterIcons";
+import { MetaBlogIcon } from "../Icons/FooterIcons/FooterIcons";
 
 export const FooterCopyRight = () => {
   return (

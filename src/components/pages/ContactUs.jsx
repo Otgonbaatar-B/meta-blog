@@ -7,7 +7,7 @@ export default function ContactUs() {
       <div className="flex flex-col w-auto h-screen gap-[100px]">
         <Header />
         <div className="flex flex-col m-auto justify-center items-center h-auto sm:px-4 md:px-20 md:py-4 2xl:px-[350px]">
-          <div className="flex flex-col justify-center items-center w-auto h-auto px-4 py-4 md:px-20 md:py-4 xl:px-[165px] gap-5">
+          <div className="flex flex-col justify-center items-center w-auto h-auto px-4 py-4 md:px-20 md:py-4 xl:px-[165px] 2xl:px-[340px] gap-5">
             <div className="flex flex-col gap-5">
               <h1 className="text-black text-4xl font-semibold font-work-sans">
                 Contact Us

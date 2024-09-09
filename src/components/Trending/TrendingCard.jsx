@@ -1,7 +1,7 @@
 export const TrendingCard = ({ badge, title, imgUrl }) => {
   return (
     <div
-      className="flex flex-col w-auto h-[320px] rounded-xl justify-end p-[20px] gap-4"
+      className="flex flex-col w-auto h-[320px] rounded-xl justify-end p-[20px] gap-4 shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400"
       style={{
         backgroundImage: `linear-gradient(0deg, rgba(20, 22, 36, 0.40) 0%, rgba(20, 22, 36, 0.40) 100%), url(${imgUrl})`,
         backgroundSize: "cover",
