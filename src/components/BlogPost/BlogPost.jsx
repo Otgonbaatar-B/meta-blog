@@ -25,11 +25,12 @@ export const BlogPost = ({
                   <div className="skeleton h-4 w-1/2 bg-gray-300"></div>
                 </div>
               ))
-            : articles.map((article) => {
+            : articles.map((article, index) => {
                 const formattedDate = <DateFormatter article={article} />;
                 return (
-                  <Link key={article.id} href={`blog/${article.id}`} passHref>
+                  <Link key={article.id} href={`/blog/${article.id}`} passHref>
                     <BlogPostBody
+                      key={index}
                       imgUrl={article.cover_image}
                       badges={article.tag_list}
                       title={article.description}
@@ -41,7 +42,7 @@ export const BlogPost = ({
         </div>
         <button
           onClick={handlePlusPage}
-          className="flex justify-center items-center w-[123px] h-[48px] border border-[rgba(105,106,117,0.3)] rounded-md px-5 py-3 text-base font-medium text-[var(--secondary-500)] shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400"
+          className="flex justify-center items-center w-[123px] h-[48px] border border-[rgba(105,106,117,0.3)] rounded-md px-5 py-3 text-base font-medium text-gray-light-700 dark:text-gray-night-700 shadow-md transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400"
         >
           Load More
         </button>

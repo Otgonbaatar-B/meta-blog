@@ -8,7 +8,7 @@ export const BlogPostListingBody = ({
 }) => {
   const noImage = "/public/Images/NoImage.png";
   return (
-    <div className="flex flex-col justify-between w-auto h-auto rounded-xl border border-solid border-[var(--secondary-100)] p-4 bg-white gap-4">
+    <div className="flex flex-col justify-between w-auto h-auto rounded-xl border border-solid border-[var(--secondary-100)] p-4 bg-white gap-4 shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
       <div
         style={{
           backgroundImage: `url(${
@@ -35,8 +35,11 @@ export const BlogPostListingBody = ({
       <div className="flex flex-wrap gap-1">
         {badges.map((badge) => {
           return (
+            // <span className="flex w-auto h-auto bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium font-work-sans px-[10px] py-1 rounded-md">
+            //   {badge}
+            // </span>
             <span className="flex w-auto h-auto bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium font-work-sans px-[10px] py-1 rounded-md">
-              {badge}
+              {badge.charAt(0).toUpperCase() + badge.slice(1)}
             </span>
           );
         })}

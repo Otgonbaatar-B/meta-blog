@@ -41,3 +41,10 @@
   --gray-night-950: #ffffff;
   --gray-n-10: #030712;
 }
+
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}

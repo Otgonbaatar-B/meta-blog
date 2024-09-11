@@ -15,7 +15,7 @@ export const BlogPostHeader = ({ handleTagChange }) => {
 
   return (
     <div className="flex flex-col w-full gap-8">
-      <h1 className="flex w-auto h-auto text-[var(--secondary-800)] text-2xl font-bold font-work-sans">
+      <h1 className="flex w-auto h-auto dark:text-gray-night-900 text-gray-light-900 text-2xl font-bold font-work-sans">
         All Blog Posts
       </h1>
       <div className="hidden md:flex justify-between w-full">
@@ -24,8 +24,10 @@ export const BlogPostHeader = ({ handleTagChange }) => {
             id="button"
             onClick={() => handleClick("")}
             className={`text-xs font-bold ${
-              clickedButton === "" ? "text-[#D4A373]" : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+              clickedButton === ""
+                ? "text-[#D4A373]"
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             All
           </button>
@@ -33,24 +35,30 @@ export const BlogPostHeader = ({ handleTagChange }) => {
           <button
             onClick={() => handleClick("learning")}
             className={`text-xs font-bold ${
-              clickedButton === "learning" ? "text-[#D4A373]" : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+              clickedButton === "learning"
+                ? "text-[#D4A373]"
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             Learning
           </button>
           <button
             onClick={() => handleClick("webdev")}
             className={`text-xs font-bold ${
-              clickedButton === "webdev" ? "text-[#D4A373]" : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+              clickedButton === "webdev"
+                ? "text-[#D4A373]"
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             Web Dev
           </button>
           <button
             onClick={() => handleClick("frontend")}
             className={`text-xs font-bold ${
-              clickedButton === "frontend" ? "text-[#D4A373]" : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+              clickedButton === "frontend"
+                ? "text-[#D4A373]"
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             Front-End
           </button>
@@ -59,16 +67,18 @@ export const BlogPostHeader = ({ handleTagChange }) => {
             className={`text-xs font-bold ${
               clickedButton === "javascript"
                 ? "text-[#D4A373]"
-                : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             Javascript
           </button>
           <button
             onClick={() => handleClick("coding")}
             className={`text-xs font-bold ${
-              clickedButton === "coding" ? "text-[#D4A373]" : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+              clickedButton === "coding"
+                ? "text-[#D4A373]"
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             Coding
           </button>
@@ -77,15 +87,15 @@ export const BlogPostHeader = ({ handleTagChange }) => {
             className={`text-xs font-bold ${
               clickedButton === "programming"
                 ? "text-[#D4A373]"
-                : "text-[#495057]"
-            } hover:text-[#D4A373] font-work-sans`}
+                : "dark:text-gray-night-600 text-gray-light-600"
+            } hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans`}
           >
             Programming
           </button>
         </div>
         <button>
           <Link href="./blog-list">
-            <p className="text-xs font-bold text-[#495057] hover:text-[#D4A373] font-work-sans">
+            <p className="text-xs font-bold dark:text-gray-night-600 text-gray-light-600 hover:text-[#D4A373] dark:hover:text-[#D4A373] font-work-sans">
               View All
             </p>
           </Link>

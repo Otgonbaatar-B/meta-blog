@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import { SliderContent } from "./SliderContent";
 import { DateFormatter } from "../Utils/DateFormatter";
 import Link from "next/link";
+import {
+  BackButtonLight,
+  BackButtonNight,
+  ForwardButtonLight,
+  ForwardButtonNight,
+} from "../Icons/BackForwardButton";
 
-export const Slider = () => {
+export const Slider = ({ isDarkMode }) => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const fetchData = () => {
     setLoading(true);
-    fetch(`https://dev.to/api/articles?per_page=1&page=${page}`)
+    fetch(`https://dev.to/api/articles?per_page=1&page=${page}&top=5`)
       .then((response) => response.json())
       .then((data) => {
         setArticles(data);
@@ -30,20 +36,20 @@ export const Slider = () => {
     fetchData();
   }, [page]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleForwardBtn();
-    }, 3000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     handleForwardBtn();
+  //   }, 3000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
-    <div className="w-full flex flex-col bg-white items-center justify-center">
+    <div className="w-full flex flex-col bg-gray-night-950 dark:bg-gray-light-950 items-center justify-center">
       <div className="flex justify-center items-center max-w-[1096px] w-full h-auto p-4 md:p-0">
         <div className="container w-full flex flex-col items-center justify-center gap-3">
           {loading ? (
-            <div className="container w-auto h-[600px] flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl">
+            <div className="container w-full h-[600px] flex flex-col justify-end items-start gap-3 p-4 md:px-4 md:py-4 rounded-xl">
               <div className="skeleton h-full w-[1096px] rounded-xl bg-gray-300 animate-pulse"></div>
               <div className="skeleton h-[500px] w-[600px] rounded-xl bg-gray-300 animate-pulse"></div>
             </div>
@@ -88,13 +94,16 @@ export const Slider = () => {
                 className="shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-lg"
                 onClick={handleBackBtn}
               >
-                <img src="/Icons/back.svg" alt="Back" />
+                {/* <img src="/Icons/back.svg" alt="Back" /> */}
+
+                {isDarkMode ? <BackButtonNight /> : <BackButtonLight />}
               </button>
               <button
                 className="shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 rounded-lg"
                 onClick={handleForwardBtn}
               >
-                <img src="/Icons/forward.svg" alt="Forward" />
+                {/* <img src="/Icons/forward.svg" alt="Forward" /> */}
+                {isDarkMode ? <ForwardButtonNight /> : <ForwardButtonLight />}
               </button>
             </div>
           </div>

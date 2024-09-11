@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const BlogPostBody = ({ articles, imgUrl, badges, title, date }) => {
   return (
-    <div className="flex flex-col justify-between w-auto h-auto rounded-xl border border-solid border-[var(--secondary-100)] p-4 bg-white gap-4 shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
+    <div className="flex flex-col justify-between w-auto h-auto rounded-xl border border-solid border-[var(--secondary-100)] p-4 bg-white dark:bg-gray-light-800 gap-4 shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400">
       <div
         style={{
           backgroundImage: `url(${
@@ -29,10 +29,10 @@ export const BlogPostBody = ({ articles, imgUrl, badges, title, date }) => {
         })}
       </div>
 
-      <div className="text-[var(--secondary-800)]] text-lg font-semibold font-work-sans cursor-pointer line-clamp-3">
+      <div className="text-gray-light-700 dark:text-gray-night-700 text-lg font-semibold font-work-sans cursor-pointer line-clamp-3">
         {title}
       </div>
-      <div className="text-[var(--secondary-400)] text-base font-normal font-work-sans">
+      <div className="text-gray-light-500 dark:text-gray-night-500  text-base font-normal font-work-sans">
         {date}
       </div>
     </div>

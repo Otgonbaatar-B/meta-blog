@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { CloseIconDark } from "../Icons/CloseIconDark";
 import { CloseIconLight } from "../Icons/CloseIconLight";
-import { MoonIcon } from "../Icons/MoonIcon";
-import { SunIcon } from "../Icons/SunIcon";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { MetaBlog, MetaBlogLight, MetaBlogNight } from "../Icons/MetaBlog";
 
 export const MobileMenu = ({
-  isDarkMode,
   handleOpenMenu,
   isOpenMenu,
-  handleToggleDarkMode,
+  isDarkMode,
+  handleToggle,
 }) => {
   const [data, setData] = useState([]);
   const [articles, setArticles] = useState([]);
@@ -50,13 +51,14 @@ export const MobileMenu = ({
       // onClick={handleOpenMenu}
       className={`absolute transition-all duration-500 ease-in-out ${
         isOpenMenu ? "right-0" : "left-[-150%]"
-      } flex justify-end min-w-[375px] w-full h-screen bg-[rgba(17,24,39,0.1)] dark:bg-[rgba(31,41,55,0.1)] backdrop-blur-sm `}
+      } flex justify-end min-w-[375px] w-full h-screen bg-[rgba(17,24,39,0.1)] dark:bg-[rgba(31,41,55,0.1)] backdrop-blur-sm`}
     >
       <div className="menu flex flex-col w-[320px] h-full bg-white dark:bg-gray-night ">
-        <div className="flex space-between p-4 border-solid border-b border-gray-light-100 dark:border-gray-night-100">
+        <div className="flex space-between p-4 border-solid border-b dark:border-gray-light-700 border-gray-night-700">
           <div className="flex w-full">
             <div className="flex w-auto cursor-pointer">
-              <img src="/Images/Logo.svg" alt="" />
+              {/* <img src="/Images/Logo.svg" alt="" /> */}
+              {isDarkMode ? <MetaBlogNight /> : <MetaBlogLight />}
             </div>
           </div>
           <button
@@ -66,7 +68,7 @@ export const MobileMenu = ({
             {isDarkMode ? <CloseIconDark /> : <CloseIconLight />}
           </button>
         </div>
-        <div className="flex flex-col p-4 gap-4 border-solid border-b border-gray-light-100 dark:border-gray-night-100">
+        <div className="flex flex-col p-4 gap-4 border-solid border-b dark:border-gray-light-700 border-gray-night-700">
           <Link href={"/"}>
             <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
               Home
@@ -82,6 +84,35 @@ export const MobileMenu = ({
               Contact
             </h1>
           </Link>
+        </div>
+        <div className="flex items-center border-b dark:border-gray-light-700 border-gray-night-700 p-4">
+          <input
+            type="checkbox"
+            id="checkbox"
+            className="hidden"
+            checked={isDarkMode}
+            onChange={handleToggle}
+          />
+          <label
+            htmlFor="checkbox"
+            className="flex items-center justify-center w-14 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 cursor-pointer"
+          >
+            <FontAwesomeIcon
+              icon={faMoon}
+              className={`text-yellow-500 ${isDarkMode ? "" : "opacity-0"}`}
+            />
+            <FontAwesomeIcon
+              icon={faSun}
+              className={`text-yellow-400 translate-x-5 ${
+                isDarkMode ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+                isDarkMode ? "translate-x-0" : "-translate-x-7"
+              }`}
+            ></span>
+          </label>
         </div>
         <div className="flex flex-col p-4 gap-4">
           <form
@@ -102,13 +133,13 @@ export const MobileMenu = ({
           </form>
         </div>
         {searchQuery && data.length > 0 && (
-          <div className="w-full h-auto overflow-scroll p-4 border border-gray-light-100">
-            <div className="flex flex-col text-clip text-[var(--secondary-600)] font-work-sans bg-transparent gap-2">
+          <div className="w-full h-auto overflow-scroll p-4 border dark:border-gray-light-700 border-gray-night-700">
+            <div className="flex flex-col text-clip text-gray-light-950 dark:text-gray-night-950 font-work-sans bg-transparent backdrop-blur-sm gap-2">
               {data.map((article, index) => (
                 <Link href={`/blog/${article.id}`} key={index}>
                   <button
                     onClick={handleOpenMenu}
-                    className="w-full h-auto border hover:backdrop-blur-sm rounded-lg"
+                    className="w-full h-auto border dark:border-gray-light-700 border-gray-night-700 rounded-lg p-1"
                   >
                     {article.title}
                   </button>

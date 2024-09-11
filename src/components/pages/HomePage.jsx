@@ -64,9 +64,15 @@ export default function HomePage() {
     setPage((prevPage) => prevPage + 1);
   };
 
-  const handleToggleDarkMode = () => {
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+  const handleToggle = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark", !isDarkMode);
   };
 
   useEffect(() => {
@@ -79,14 +85,14 @@ export default function HomePage() {
   // }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full m-auto gap-[100px]">
+    <div className="flex flex-col justify-center items-center w-full h-full bg-gray-night-950 dark:bg-gray-light-950 m-auto gap-[100px]">
       <Header
         // data={data}
         // handleSearchFilter={handleSearchFilter}
         isDarkMode={isDarkMode}
-        handleToggleDarkMode={handleToggleDarkMode}
+        handleToggle={handleToggle}
       />
-      <Slider />
+      <Slider isDarkMode={isDarkMode} />
       <Trending trendingData={trendingData} loading={loading} />
       <BlogPost
         articles={articles}
@@ -95,7 +101,7 @@ export default function HomePage() {
         loading={loading}
         // path={articles.path}
       />
-      <Footer />
+      <Footer isDarkMode={isDarkMode} />
     </div>
   );
 }

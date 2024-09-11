@@ -23,12 +23,12 @@ export const BlogPostListing = ({ articles = [], handlePlusPage, loading }) => {
                   <div className="skeleton h-4 w-1/2 bg-gray-300"></div>
                 </div>
               ))
-            : articles.map((article) => {
+            : articles.map((article, index) => {
                 const formattedDate = <DateFormatter article={article} />;
                 return (
-                  <Link href={`blog/${article.id}`}>
+                  <Link href={`/blog/${article.id}`}>
                     <BlogPostListingBody
-                      key={article.id}
+                      key={article.id + index}
                       imgUrl={article.cover_image}
                       badges={article.tag_list}
                       title={article.description}
