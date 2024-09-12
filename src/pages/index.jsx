@@ -1,13 +1,4 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Header } from "../components/Header/Header";
-import { Slider } from "../components/Slider/Slider";
-import { Trending } from "../components/Trending/Trending";
 import HomePage from "@/components/Pages/HomePage";
-// import { Work_Sans } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
   return (
     <div className="main w-full h-full">

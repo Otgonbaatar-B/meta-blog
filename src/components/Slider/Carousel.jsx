@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SliderContent } from "./SliderContent";
+import { SliderContent } from "./CarouselContent";
 import { DateFormatter } from "../Utils/DateFormatter";
 import Link from "next/link";
 import {

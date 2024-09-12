@@ -1,5 +1,7 @@
 import BlogListing from "@/components/Pages/BlogListing";
 
-export const Blog = () => {
+const Blog = () => {
   return <BlogListing />;
 };
+
+export default Blog;

@@ -1,7 +1,25 @@
 import Link from "next/link";
 import { TrendingCard } from "./TrendingCard";
+import { useEffect, useState } from "react";
 
-export const Trending = ({ trendingData, loading }) => {
+export const Trending = () => {
+  const [trendingArticles, setTrendingArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchTrendingData = () => {
+    setLoading(true);
+    fetch(`https://dev.to/api/articles?per_page=4&top=4`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTrendingArticles(data);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchTrendingData();
+  }, []);
+
   return (
     <div className="w-full flex flex-col bg-gray-night-950 dark:bg-gray-light-950 items-center justify-center">
       <div className="w-full max-w-[1256px] flex flex-col items-center justify-center">
@@ -22,7 +40,7 @@ export const Trending = ({ trendingData, loading }) => {
                       <div className="skeleton h-4 w-1/2 bg-gray-300"></div>
                     </div>
                   ))
-                : trendingData.map((data) => (
+                : trendingArticles.map((data) => (
                     <Link key={data.id} href={`blog/${data.id}`} passHref>
                       <TrendingCard
                         badge={data.tag_list[0]}

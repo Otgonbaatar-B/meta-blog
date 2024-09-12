@@ -8,7 +8,6 @@ const BlogListPage = () => {
 
   const fetchData = () => {
     setLoading(true);
-
     fetch(`https://dev.to/api/articles?per_page=12&page=${page}`)
       .then((response) => response.json())
       .then((data) => {

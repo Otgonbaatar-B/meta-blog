@@ -20,13 +20,20 @@ export const BlogPostBody = ({ articles, imgUrl, badges, title, date }) => {
         {/* <img src={imgUrl} alt="" srcset="" /> */}
       </div>
       <div className="flex flex-wrap gap-1">
-        {badges.map((badge) => {
-          return (
-            <span className="flex w-auto h-auto bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium font-work-sans px-[10px] py-1 rounded-md">
-              {badge}
+        {badges && badges.length > 0 ? (
+          badges.map((badge, index) => (
+            <span
+              key={index}
+              className="flex w-auto h-auto bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium font-work-sans px-[10px] py-1 rounded-md"
+            >
+              {badge.charAt(0).toUpperCase() + badge.slice(1)}
             </span>
-          );
-        })}
+          ))
+        ) : (
+          <span className="flex w-auto h-auto bg-[#4B6BFB0D] text-[#4B6BFB] text-sm font-medium font-work-sans px-[10px] py-1 rounded-md">
+            Empty
+          </span>
+        )}
       </div>
 
       <div className="text-gray-light-700 dark:text-gray-night-700 text-lg font-semibold font-work-sans cursor-pointer line-clamp-3">

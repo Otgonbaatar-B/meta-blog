@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export const BlogPostListing = ({ articles = [], handlePlusPage, loading }) => {
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <div className="container max-w-[1256px] flex flex-col w-full h-auto justify-center items-center p-4 md:px-20 md:py-4 gap-8">
+    <div className="w-full flex flex-col items-center bg-gray-night-950 dark:bg-gray-light-950 justify-center">
+      <div className="container max-w-[1256px] bg-gray-night-950 dark:bg-gray-light-950 flex flex-col w-full h-auto justify-center items-center p-4 md:px-20 md:py-4 gap-8">
         <div className="flex flex-col w-full gap-8">
           <h1 className="flex w-auto h-auto text-[var(--secondary-800)] text-2xl font-bold font-work-sans">
             All Blog Post

@@ -10,7 +10,7 @@ export const MobileMenu = ({
   handleOpenMenu,
   isOpenMenu,
   isDarkMode,
-  handleToggle,
+  handleThemeToggle,
 }) => {
   const [data, setData] = useState([]);
   const [articles, setArticles] = useState([]);
@@ -91,7 +91,7 @@ export const MobileMenu = ({
             id="checkbox"
             className="hidden"
             checked={isDarkMode}
-            onChange={handleToggle}
+            onChange={handleThemeToggle}
           />
           <label
             htmlFor="checkbox"

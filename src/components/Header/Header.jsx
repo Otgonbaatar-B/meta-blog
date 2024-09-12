@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { MetaBlogLight, MetaBlogNight } from "../Icons/MetaBlog";
 
-export const Header = ({ handleToggle, isDarkMode }) => {
+export const Header = ({ handleThemeToggle, isDarkMode }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
@@ -107,76 +107,78 @@ export const Header = ({ handleToggle, isDarkMode }) => {
               </button>
             </Link>
           </div>
-          <div className="hidden lg:flex items-center">
-            <input
-              type="checkbox"
-              id="checkbox"
-              className="hidden"
-              checked={isDarkMode}
-              onChange={handleToggle}
-            />
-            <label
-              htmlFor="checkbox"
-              className="flex items-center justify-center w-14 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 cursor-pointer"
-            >
-              <FontAwesomeIcon
-                icon={faMoon}
-                className={`text-yellow-500 ${isDarkMode ? "" : "opacity-0"}`}
+          <div className="flex gap-5">
+            <div className="hidden lg:flex items-center">
+              <input
+                type="checkbox"
+                id="checkbox"
+                className="hidden"
+                checked={isDarkMode}
+                onChange={handleThemeToggle}
               />
-              <FontAwesomeIcon
-                icon={faSun}
-                className={`text-yellow-400 translate-x-5 ${
-                  isDarkMode ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
-                  isDarkMode ? "translate-x-0" : "-translate-x-7"
-                }`}
-              ></span>
-            </label>
-          </div>
-          <div className="hidden md:flex w-auto h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px] gap-3">
-            <input
-              placeholder="Search"
-              onChange={(event) => handleSearchFilter(event.target.value)}
-              value={searchQuery}
-              type="search"
-              className="bg-[var(--secondary-100)] w-[114px] h-5 outline-none"
-              name="q"
-              id=""
-            />
-            <button type="button" onClick={startSpeechRecognition}>
-              <FontAwesomeIcon
-                className="hover:shadow-2xl"
-                icon={faMicrophone}
-                style={{ color: "#52525b" }}
-              />
-            </button>
-            {searchQuery && data.length > 0 && (
-              <div
-                style={{
-                  background:
-                    "linear-gradient(0deg, rgba(20, 22, 36, 0.40) 0%, rgba(20, 22, 36, 0.40) 100%)",
-                }}
-                className="absolute overflow-scroll w-[400px] h-[400px] right-[85px] backdrop-blur-sm mt-9 m-auto outline-none rounded-lg p-3"
+              <label
+                htmlFor="checkbox"
+                className="flex items-center justify-center w-14 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 cursor-pointer"
               >
-                <div className="flex flex-col flex-wrap gap-4 text-[var(--secondary-600)] font-work-sans bg-transparent mt-3">
-                  {data.map((article, index) => (
-                    <Link href={`/blog/${article.id}`} key={index}>
-                      <div
-                        className={`w-full text-white hover:backdrop-blur-sm hover:border-x-white h-auto border rounded-md px-2`}
-                      >
-                        {article.title}
-                      </div>
-                    </Link>
-                  ))}
+                <FontAwesomeIcon
+                  icon={faMoon}
+                  className={`text-yellow-500 ${isDarkMode ? "" : "opacity-0"}`}
+                />
+                <FontAwesomeIcon
+                  icon={faSun}
+                  className={`text-yellow-400 translate-x-5 ${
+                    isDarkMode ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform ${
+                    isDarkMode ? "translate-x-0" : "-translate-x-7"
+                  }`}
+                ></span>
+              </label>
+            </div>
+            <div className="hidden md:flex w-auto h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px] gap-3">
+              <input
+                placeholder="Search"
+                onChange={(event) => handleSearchFilter(event.target.value)}
+                value={searchQuery}
+                type="search"
+                className="bg-[var(--secondary-100)] w-[114px] h-5 outline-none"
+                name="q"
+                id=""
+              />
+              <button type="button" onClick={startSpeechRecognition}>
+                <FontAwesomeIcon
+                  className="hover:shadow-2xl"
+                  icon={faMicrophone}
+                  style={{ color: "#52525b" }}
+                />
+              </button>
+              {searchQuery && data.length > 0 && (
+                <div
+                  style={{
+                    background:
+                      "linear-gradient(0deg, rgba(20, 22, 36, 0.40) 0%, rgba(20, 22, 36, 0.40) 100%)",
+                  }}
+                  className="absolute overflow-scroll w-[400px] h-[400px] right-[85px] backdrop-blur-sm mt-9 m-auto outline-none rounded-lg p-3"
+                >
+                  <div className="flex flex-col flex-wrap gap-4 text-[var(--secondary-600)] font-work-sans bg-transparent mt-3">
+                    {data.map((article, index) => (
+                      <Link href={`/blog/${article.id}`} key={index}>
+                        <div
+                          className={`w-full text-white hover:backdrop-blur-sm hover:border-x-white h-auto border rounded-md px-2`}
+                        >
+                          {article.title}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-            <button type="submit">
-              <img src="/Icons/search-icon.svg" alt="Search Icon" />
-            </button>
+              )}
+              <button type="submit">
+                <img src="/Icons/search-icon.svg" alt="Search Icon" />
+              </button>
+            </div>
           </div>
           <div
             className="flex md:hidden w-auto h-auto bg-var(--secondary-100) cursor-pointer"
@@ -189,7 +191,7 @@ export const Header = ({ handleToggle, isDarkMode }) => {
           isDarkMode={isDarkMode}
           handleOpenMenu={handleOpenMenu}
           isOpenMenu={isOpen}
-          handleToggle={handleToggle}
+          handleThemeToggle={handleThemeToggle}
         />
       </div>
     </div>
