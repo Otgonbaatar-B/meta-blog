@@ -6,13 +6,11 @@ export const BlogListing = ({ articles, handlePlusPage, loading }) => {
   return (
     <div>
       <div className="flex flex-col gap-[100px]">
-        <Header />
         <BlogPostListing
           articles={articles}
           handlePlusPage={handlePlusPage}
           loading={loading}
         />
-        <Footer />
       </div>
     </div>
   );

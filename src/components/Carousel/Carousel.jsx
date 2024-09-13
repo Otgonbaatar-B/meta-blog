@@ -8,12 +8,13 @@ import {
   ForwardButtonLight,
   ForwardButtonNight,
 } from "../Icons/BackForwardButton";
+import { useTheme } from "../Utils/ThemeContext";
 
-export const Slider = ({ isDarkMode }) => {
+export const Slider = () => {
+  const { isDarkMode } = useTheme();
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-
   const fetchData = () => {
     setLoading(true);
     fetch(`https://dev.to/api/articles?per_page=1&page=${page}&top=5`)

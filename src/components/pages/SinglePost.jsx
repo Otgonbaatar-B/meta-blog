@@ -7,11 +7,15 @@ import { DateFormatter } from "../Utils/DateFormatter";
 const SinglePostPage = () => {
   const router = useRouter();
   const id = router.query.id;
+  const [loading, setLoading] = useState(true);
   const [article, setArticle] = useState({});
+
   const fetchData = () => {
+    setLoading(false);
     fetch(`https://dev.to/api/articles/${id}`)
       .then((response) => response.json())
       .then((data) => setArticle(data));
+    setLoading(true);
   };
   useEffect(() => {
     fetchData();
@@ -21,9 +25,8 @@ const SinglePostPage = () => {
   return (
     <div className="flex flex-col w-full h-auto justify-center items-center">
       <div className="container max-w-[1256px] flex flex-col items-center gap-[100px]">
-        <Header />
         <div className="flex flex-col w-full p-4 md:px-20 md:py-4 gap-8">
-          <h1 className="font-bold font-work-sans text-4xl ">
+          <h1 className="font-bold font-work-sans dark:text-gray-night-950 text-4xl ">
             {article?.title}
           </h1>
           {/* <div className="flex items-center gap-3 mt-5">
@@ -46,11 +49,11 @@ const SinglePostPage = () => {
                 }}
                 className="flex"
               ></div>
-              <div className="flex items-center text-[var(--secondary-400)] text-base font-normal">
+              <div className="flex items-center text-[var(--secondary-400)] dark:text-gray-night-600 text-base font-normal">
                 {article?.user?.name}
               </div>
             </div>
-            <div className="flex text-[var(--secondary-400)] text-base font-normal">
+            <div className="flex text-[var(--secondary-400)] dark:text-gray-night-600 text-base font-normal">
               {formattedDate}
             </div>
           </div>
@@ -59,10 +62,12 @@ const SinglePostPage = () => {
               <img src={article?.cover_image} width={"100%"} height={"auto"} />
             </div>
             <div className="w-full h-auto">
-              <h1 className="text-2xl font-semibold">{article?.description}</h1>
+              <h1 className="text-2xl font-semibold dark:text-gray-night-700 font-work-sans">
+                {article?.description}
+              </h1>
             </div>
             <div>
-              <p>
+              <p className="font-work-sans dark:text-gray-night-500">
                 Russian President Vladimir Putin has made it clear his goal is
                 to gain control over the entirety of Ukraine’s Donetsk and
                 Luhansk regions and taking over Pokrovsk, an important military
@@ -78,10 +83,10 @@ const SinglePostPage = () => {
               </p>
             </div>
             <div>
-              <h1 className="text-2xl font-semibold">
+              <h1 className="text-2xl font-semibold dark:text-gray-night-700 font-work-sans">
                 Research Your Destination
               </h1>
-              <p>
+              <p className="font-work-sans dark:text-gray-night-500">
                 “The days are long, they live in a dugout, on duty around the
                 clock and if they can’t shoot, the Russians have an advantage,
                 they hear them advancing and they know that if they had fired it
@@ -97,8 +102,10 @@ const SinglePostPage = () => {
               </p>
             </div>
             <div className="mb-24">
-              <h1 className="text-2xl font-semibold">Plan Your Itinerary</h1>
-              <p>
+              <h1 className="text-2xl font-semibold dark:text-gray-night-700 font-work-sans">
+                Plan Your Itinerary
+              </h1>
+              <p className="font-work-sans dark:text-gray-night-500">
                 It’s a staggering and – most likely – incomplete number. Several
                 commanders told CNN that many officers would not report
                 desertion and unauthorized absences, hoping instead to convince
@@ -117,7 +124,6 @@ const SinglePostPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

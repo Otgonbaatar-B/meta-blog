@@ -43,7 +43,7 @@ export const HamburgerIconNight = () => {
     >
       <path
         d="M10 18H26"
-        stroke="#D1D5DB"
+        stroke="#ffffff"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"

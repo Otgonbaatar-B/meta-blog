@@ -1,25 +1,38 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MobileMenu } from "../MobileMenu/MobileMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { MetaBlogLight, MetaBlogNight } from "../Icons/MetaBlog";
+import { useTheme } from "../Utils/ThemeContext";
+import { SearchIconLight, SearchIconNight } from "../Icons/SearchIcon";
+import { HamburgerIconLight, HamburgerIconNight } from "../Icons/HamburgerIcon";
 
-export const Header = ({ handleThemeToggle, isDarkMode }) => {
+export const Header = () => {
+  const { isDarkMode, handleThemeToggle } = useTheme();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [data, setData] = useState([]);
   const [articles, setArticles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const searchResultsRef = useRef(null);
+
+  if (typeof document !== "undefined") {
+    document.addEventListener("mousedown", () => {
+      setIsOpenSearch(false);
+    });
+  }
 
   const fetchData = () => {
-    fetch(`https://dev.to/api/articles`)
+    fetch(`https://dev.to/api/articles?per_page=100`)
       .then((response) => response.json())
       .then((data) => setArticles(data));
   };
 
   const handleSearchFilter = (value) => {
+    setIsOpenSearch(true);
     setSearchQuery(value);
     const filteredArray = articles.filter((filter) =>
       filter.title.toLowerCase().includes(value)
@@ -30,6 +43,25 @@ export const Header = ({ handleThemeToggle, isDarkMode }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchResultsRef.current &&
+        !searchResultsRef.current.contains(event.target)
+      ) {
+        setIsOpenSearch(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleClickLink = () => {
+    setIsOpenSearch(false);
+    setSearchQuery("");
+  };
 
   const handleOpenMenu = () => {
     setIsOpen(!isOpen);
@@ -58,7 +90,7 @@ export const Header = ({ handleThemeToggle, isDarkMode }) => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center ">
       <div className="flex w-full fixed max-w-[1256px] justify-center mt-16 md:px-20">
         <div className="w-full h-[70px] bg-gray-night-950 dark:bg-gray-light-950 flex justify-between items-center px-4 xl:px-1 lg:px-0 md:px-0 md:py-4 ">
           <Link href={"/"}>
@@ -118,7 +150,7 @@ export const Header = ({ handleThemeToggle, isDarkMode }) => {
               />
               <label
                 htmlFor="checkbox"
-                className="flex items-center justify-center w-14 h-7 bg-gray-400 dark:bg-gray-600 rounded-full p-1 cursor-pointer"
+                className="flex items-center justify-center w-14 h-7 bg-gray-light-100 dark:bg-gray-night-100 border rounded-full p-1 cursor-pointer"
               >
                 <FontAwesomeIcon
                   icon={faMoon}
@@ -137,34 +169,39 @@ export const Header = ({ handleThemeToggle, isDarkMode }) => {
                 ></span>
               </label>
             </div>
-            <div className="hidden md:flex w-auto h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px] gap-3">
+            <div className="hidden md:flex w-auto h-auto border dark:text-white text-black bg-gray-light-100 dark:bg-gray-night-100 pl-4 py-2 pr-2 rounded-[5px] gap-3">
               <input
                 placeholder="Search"
                 onChange={(event) => handleSearchFilter(event.target.value)}
                 value={searchQuery}
                 type="search"
-                className="bg-[var(--secondary-100)] w-[114px] h-5 outline-none"
+                className="bg-gray-light-100 dark:bg-gray-night-100 w-[114px] h-5 outline-none"
                 name="q"
                 id=""
               />
               <button type="button" onClick={startSpeechRecognition}>
                 <FontAwesomeIcon
-                  className="hover:shadow-2xl"
+                  className="text-[#52525b] dark:text-gray-light-200"
                   icon={faMicrophone}
-                  style={{ color: "#52525b" }}
+                  // style={{ color: "#52525b" }}
                 />
               </button>
               {searchQuery && data.length > 0 && (
                 <div
+                  ref={searchResultsRef}
                   style={{
                     background:
                       "linear-gradient(0deg, rgba(20, 22, 36, 0.40) 0%, rgba(20, 22, 36, 0.40) 100%)",
                   }}
-                  className="absolute overflow-scroll w-[400px] h-[400px] right-[85px] backdrop-blur-sm mt-9 m-auto outline-none rounded-lg p-3"
+                  className="absolute overflow-scroll transition-all duration-200 w-[400px] h-[400px] right-[85px] backdrop-blur-sm mt-9 m-auto outline-none rounded-lg p-3"
                 >
                   <div className="flex flex-col flex-wrap gap-4 text-[var(--secondary-600)] font-work-sans bg-transparent mt-3">
                     {data.map((article, index) => (
-                      <Link href={`/blog/${article.id}`} key={index}>
+                      <Link
+                        onClick={handleClickLink}
+                        href={`/blog/${article.id}`}
+                        key={index}
+                      >
                         <div
                           className={`w-full text-white hover:backdrop-blur-sm hover:border-x-white h-auto border rounded-md px-2`}
                         >
@@ -176,7 +213,8 @@ export const Header = ({ handleThemeToggle, isDarkMode }) => {
                 </div>
               )}
               <button type="submit">
-                <img src="/Icons/search-icon.svg" alt="Search Icon" />
+                {/* <img src="/Icons/search-icon.svg" alt="Search Icon" /> */}
+                {isDarkMode ? <SearchIconNight /> : <SearchIconLight />}
               </button>
             </div>
           </div>
@@ -184,7 +222,8 @@ export const Header = ({ handleThemeToggle, isDarkMode }) => {
             className="flex md:hidden w-auto h-auto bg-var(--secondary-100) cursor-pointer"
             onClick={handleOpenMenu}
           >
-            <img src="/Icons/menu-outline.svg" alt="" />
+            {/* <img src="/Icons/menu-outline.svg" alt="" /> */}
+            {isDarkMode ? <HamburgerIconNight /> : <HamburgerIconLight />}
           </div>
         </div>
         <MobileMenu

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { CloseIconDark } from "../Icons/CloseIconDark";
 import { CloseIconLight } from "../Icons/CloseIconLight";
 import Link from "next/link";
@@ -15,6 +15,7 @@ export const MobileMenu = ({
   const [data, setData] = useState([]);
   const [articles, setArticles] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const menuRef = useRef(null);
 
   const fetchData = () => {
     fetch(`https://dev.to/api/articles`)
@@ -46,18 +47,35 @@ export const MobileMenu = ({
     };
   }, [isOpenMenu]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpenMenu) {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+          handleOpenMenu();
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef, handleOpenMenu]);
+
   return (
     <div
-      // onClick={handleOpenMenu}
-      className={`absolute transition-all duration-500 ease-in-out ${
+      className={`absolute transition-all duration-800 ease-in-out ${
         isOpenMenu ? "right-0" : "left-[-150%]"
       } flex justify-end min-w-[375px] w-full h-screen bg-[rgba(17,24,39,0.1)] dark:bg-[rgba(31,41,55,0.1)] backdrop-blur-sm`}
     >
-      <div className="menu flex flex-col w-[320px] h-full bg-white dark:bg-gray-night ">
+      <div
+        ref={menuRef}
+        className="menu flex flex-col w-[320px] h-full bg-white dark:bg-gray-night"
+      >
         <div className="flex space-between p-4 border-solid border-b dark:border-gray-light-700 border-gray-night-700">
           <div className="flex w-full">
             <div className="flex w-auto cursor-pointer">
-              {/* <img src="/Images/Logo.svg" alt="" /> */}
               {isDarkMode ? <MetaBlogNight /> : <MetaBlogLight />}
             </div>
           </div>
@@ -70,19 +88,25 @@ export const MobileMenu = ({
         </div>
         <div className="flex flex-col p-4 gap-4 border-solid border-b dark:border-gray-light-700 border-gray-night-700">
           <Link href={"/"}>
-            <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
-              Home
-            </h1>
+            <button onClick={handleOpenMenu}>
+              <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
+                Home
+              </h1>
+            </button>
           </Link>
           <Link href={"/blog-list"}>
-            <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
-              Blog
-            </h1>
+            <button onClick={handleOpenMenu}>
+              <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
+                Blog
+              </h1>
+            </button>
           </Link>
           <Link href={"/contact-us"}>
-            <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
-              Contact
-            </h1>
+            <button onClick={handleOpenMenu}>
+              <h1 className="text-gray-light-600 dark:text-gray-night-600 cursor-pointer">
+                Contact
+              </h1>
+            </button>
           </Link>
         </div>
         <div className="flex items-center border-b dark:border-gray-light-700 border-gray-night-700 p-4">
@@ -118,7 +142,7 @@ export const MobileMenu = ({
           <form
             action="https://www.google.com/search"
             method="GET"
-            className="flex w-[160px] h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px] "
+            className="flex w-[160px] h-auto bg-[var(--secondary-100)] pl-4 py-2 pr-2 rounded-[5px]"
           >
             <input
               type="search"
